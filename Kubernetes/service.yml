@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: nodejs-clone-app
   labels:
-    app: node-clone-app
+    app: nodejs-clone-app
 spec:
   type: LoadBalancer
   ports:
