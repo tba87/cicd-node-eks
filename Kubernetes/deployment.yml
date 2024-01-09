@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nodejs-clone-app
   labels:
-    app: node-clone-app
+    app: nodejs-clone-app
 spec:
   replicas: 2
   selector:
