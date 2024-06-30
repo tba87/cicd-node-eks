@@ -1,5 +1,7 @@
+##### NODE BLOCK  ######
+
 # Use an official Node.js runtime as a parent image
-FROM node:16
+FROM node:16 as nodebuild
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,7 +19,15 @@ COPY . .
 RUN npm run build
 
 # Expose the port that the app will run on (adjust if needed)
-EXPOSE 3000
+# EXPOSE 3000
 
 # Define the command to start the app
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+
+##### NGINX BLOCK  ######
+
+FROM nginx:1.23-alpine
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=nodebuild /app/build .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
