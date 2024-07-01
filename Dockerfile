@@ -1,4 +1,5 @@
-##### NODE BLOCK  ######
+########### NODE BUILD  ###############
+
 
 # Use an official Node.js runtime as a parent image
 FROM node:16 as nodebuild
@@ -24,10 +25,22 @@ RUN npm run build
 # Define the command to start the app
 # CMD ["npm", "start"]
 
-##### NGINX BLOCK  ######
 
+
+############  NGINX BUILD ######################
+
+# USING BASE IMAGE: NGINX
 FROM nginx:1.23-alpine
+
+# MAKING DEFAULT WORKDIR
 WORKDIR /usr/share/nginx/html
+
+# REMOVING OLD index.html
 RUN rm -rf ./*
+
+# COPYING all FILES FROM PREVIOUS BUILD
 COPY --from=nodebuild /app/build .
+
+
+#RUNNING THE NGINX AS FOREGROUND
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
