@@ -20,6 +20,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "publishConfig": {"registry": "http://192.168.220.129:8081/repository/npm-hosted-repo/"},
+
   "eslintConfig": {
     "extends": [
       "react-app",
